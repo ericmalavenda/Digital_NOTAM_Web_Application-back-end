@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Database_Layout_Manager extends Database_Connection {
 
-    public void createTables() {
+    void createTables() {
         try{
             stmt = conn.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS notams (" +
@@ -33,7 +33,7 @@ public class Database_Layout_Manager extends Database_Connection {
         }
     }
 
-    public void testAddEntry1(){
+    void testAddEntry1(){
         try{
             PreparedStatement st = conn.prepareStatement(
                     "INSERT INTO NOTAMS " +
@@ -69,7 +69,7 @@ public class Database_Layout_Manager extends Database_Connection {
         }
     }
 
-    public void testAddEntry2(){
+    void testAddEntry2(){
         try {
             PreparedStatement st = conn.prepareStatement(
                     "INSERT INTO NOTAMS " +
@@ -104,7 +104,7 @@ public class Database_Layout_Manager extends Database_Connection {
         }
     }
 
-    public void testAddEntry3(){
+    void testAddEntry3(){
         try {
             PreparedStatement st = conn.prepareStatement(
                     "INSERT INTO NOTAMS " +
@@ -142,9 +142,8 @@ public class Database_Layout_Manager extends Database_Connection {
     /**
      * Counts the number of notams by number of row entries in db.
      * Prints notam count.
-     * For testing.
      */
-    void countEntres(){
+    void testCountEntries(){
         int number_of_rows = -1;
         try{
             PreparedStatement st = conn.prepareStatement(
@@ -168,7 +167,7 @@ public class Database_Layout_Manager extends Database_Connection {
      *                    a notam search query.
      * @return query result of user's notam search by airport code.
      */
-    public String testGetEntree(String airportCode){
+    String testGetEntry_(String airportCode){
         StringBuilder toReturn = new StringBuilder();
         try {
             Statement st = conn.createStatement();
@@ -204,7 +203,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * code matching the user's input.
      */
 
-    public NotamModel testGetEntry(String airportCode){
+    NotamModel testGetEntry(String airportCode){
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -236,7 +235,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return all notam entries having the airport code matching user
      * input, returned as an array of type 'Object[]'.
      */
-    public Object[] testGetMultipleEntries(String airportCode) {
+    Object[] testGetMultipleEntries(String airportCode) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -281,7 +280,7 @@ public class Database_Layout_Manager extends Database_Connection {
      *                    notam entry data.
      * @return String geo-coordinates formatted as a JSON string.
      */
-    public String getAirportCoordinates(String airportCode){
+    String getAirportCoordinates(String airportCode){
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -329,7 +328,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * notam in our database. Each notam has a unique key
      * for identification in our db, in the format of a notam key-as-string.
      */
-    public ArrayList<Object> getAllAirportCoordinates(Object[] airportCodes) {
+    ArrayList<Object> getAllAirportCoordinates(Object[] airportCodes) {
         ArrayList<Object> airportCodeList = new ArrayList<>();
         int i = airportCodes.length - 1;
         int j = -1;
@@ -370,7 +369,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * instances matching a user's input notam key. Should
      * return only a single notam instance.
      */
-    public Object[] searchByNotamKey(String key) {
+    Object[] searchByNotamKey(String key) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -405,7 +404,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return Object[] an array of notam object model db
      * instances matching a user's input airportCode.
      */
-    public Object[] searchByNotamAirportCode(String airportCode){
+    Object[] searchByNotamAirportCode(String airportCode){
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -440,7 +439,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * instances matching a user's input notam type.
      */
 
-    public Object[] searchByNotamType(String type) {
+    Object[] searchByNotamType(String type) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -474,7 +473,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return Object[] an array of notam object model db
      * instances matching a user's input notam effective date.
      */
-    public Object[] searchByNotamEffectiveDate(String effectiveDate) {
+    Object[] searchByNotamEffectiveDate(String effectiveDate) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -508,7 +507,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return Object[] an array of notam object model db
      * instances matching a user's input notam created date.
      */
-    public Object[] searchByNotamCreatedDate(String createdDate) {
+    Object[] searchByNotamCreatedDate(String createdDate) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -542,7 +541,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return Object[] an array of notam object model db
      * instances matching a user's input notam source.
      */
-    public Object[] searchByNotamSource(String source) {
+    Object[] searchByNotamSource(String source) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -572,7 +571,7 @@ public class Database_Layout_Manager extends Database_Connection {
      *
      * @return Object[] all rows of notam data entry values in our db.
      */
-    public Object[] getAllNotams() {
+    Object[] getAllNotams() {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(
@@ -615,7 +614,7 @@ public class Database_Layout_Manager extends Database_Connection {
      * resulting from a user's search query.
      * @throws SQLException if one is thrown by a method invoking this helper.
      */
-    public Object[] getNextMatchingEntry(
+    private Object[] getNextMatchingEntry(
             ResultSet rs,
             ArrayList<NotamModel> multArrayList) throws SQLException {
         while(rs.next()) {
@@ -643,9 +642,9 @@ public class Database_Layout_Manager extends Database_Connection {
      * @return String concatenation of notam data-turned-to-string
      * to render for display when a user mouseclicks
      * the notam key value (value in first column) of any row of notam
-     * data previously returned upon that user's submitted search query.
+     * data previously returned in response to user submitted search query.
      */
-    public String getRawNotamData(String key){
+    String getRawNotamData(String key){
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(

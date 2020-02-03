@@ -25,7 +25,7 @@ public class RestController {
         database_connection.connect();
 
         //Count Entrees
-        database_connection.countEntres();
+        database_connection.testCountEntries();
 
         database_connection.testAddEntry2();
         database_connection.testAddEntry3();
@@ -161,14 +161,14 @@ public class RestController {
         return results;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapByKey")
     /**
      * @param key unique key in db
      * @return NOTAM having unique key input by user to execute
      * in search query. Should return a single notam since key
      * is unique key in db
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapByKey")
     Object searchNotamKey(@RequestBody String key) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
@@ -183,13 +183,13 @@ public class RestController {
         return result;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapByAirportCode")
     /**
      * @param airportCode of NOTAM
      * @return NOTAMs associated with a specific airport code, input by user
      * to query db according to airport code.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapByAirportCode")
     Object[] searchNotamAirportCode(@RequestBody String airportCode) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
@@ -204,12 +204,12 @@ public class RestController {
         return results;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapByType")
     /**
      * @param type of NOTAM
      * @return NOTAMs that are of a a type queried by user.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapByType")
     Object[] searchNotamType(@RequestBody String type) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
@@ -224,12 +224,12 @@ public class RestController {
         return results;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapByEffectiveDate")
     /**
      * @param effectiveDate of NOTAM
      * @return NOTAMs that are of an effective date queried by user.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapByEffectiveDate")
     Object[] searchNotamEffectiveDate(@RequestBody String effectiveDate) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
@@ -244,12 +244,12 @@ public class RestController {
         return results;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapByCreatedDate")
     /**
      * @param createdDate of NOTAM
      * @return NOTAMs that are of a created date queried by user.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapByCreatedDate")
     Object[] searchNotamCreatedDate(@RequestBody String createdDate) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
@@ -264,12 +264,12 @@ public class RestController {
         return results;
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/populateMapBySource")
     /**
      * @param source of NOTAM
      * @return NOTAMs that are from a source queried by user.
      */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/populateMapBySource")
     Object[] searchNotamSource(@RequestBody String source) {
         //Creating initial database_connection
         Database_Layout_Manager database_connection = new Database_Layout_Manager();
